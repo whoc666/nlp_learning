@@ -1,0 +1,4 @@
+# Spaces 依赖
+transformers
+peft
+gradio

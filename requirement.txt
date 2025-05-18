@@ -1,0 +1,10 @@
+transformers>=4.41.1
+datasets
+peft==0.10.0
+accelerate==0.27.2
+bitsandbytes==0.42.0
+sentence-transformers
+huggingface_hub
+gradio
+requests
+torch
