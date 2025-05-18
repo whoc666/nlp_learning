@@ -1,18 +1,23 @@
 from datasets import load_from_disk
-from transformers import AutoTokenizer, AutoModelForCausalLM
+from transformers import AutoTokenizer, AutoModelForCausalLM, Trainer, TrainingArguments
 from peft import LoraConfig, get_peft_model, prepare_model_for_int8_training
-from transformers import Trainer, TrainingArguments
+import torch
 
 def train():
-    # 1. 加载预处理后的数据集
     dataset = load_from_disk("/content/processed_data")
+    print(f"加载数据集，样本数：{len(dataset)}")
 
-    # 2. 加载模型和分词器
-    model_name = "TheBloke/tinyLlama-7B"  # 你的模型
-    tokenizer = AutoTokenizer.from_pretrained(model_name)
-    model = AutoModelForCausalLM.from_pretrained(model_name, load_in_8bit=True, device_map="auto")
+    model_name = "TheBloke/TinyLlama-1.1B-Chat-v1.0"
+    tokenizer = AutoTokenizer.from_pretrained(model_name, use_fast=False)
+    model = AutoModelForCausalLM.from_pretrained(
+        model_name,
+        load_in_8bit=True,
+        device_map="auto"
+    )
+    model.config.use_cache = False  # 避免 gradient checkpointing 报错
 
-    # 3. 准备模型进行 LoRA 微调
+    print("模型和分词器加载完成")
+
     model = prepare_model_for_int8_training(model)
     lora_config = LoraConfig(
         r=8,
@@ -23,24 +28,23 @@ def train():
         task_type="CAUSAL_LM",
     )
     model = get_peft_model(model, lora_config)
+    print("LoRA模型准备完成")
 
-    # 4. 设置训练参数
     training_args = TrainingArguments(
         output_dir="./lora_tinyllama",
-        per_device_train_batch_size=4,
-        gradient_accumulation_steps=4,
-        num_train_epochs=3,
+        per_device_train_batch_size=1,
+        gradient_accumulation_steps=8,
+        num_train_epochs=1,  # 先跑一轮试试
         learning_rate=2e-4,
         fp16=True,
         logging_steps=10,
         save_steps=50,
-        save_total_limit=2,
+        save_total_limit=1,
         evaluation_strategy="no",
         report_to="none",
         push_to_hub=False,
     )
 
-    # 5. 定义 Trainer
     trainer = Trainer(
         model=model,
         args=training_args,
@@ -48,11 +52,11 @@ def train():
         tokenizer=tokenizer,
     )
 
-    # 6. 开始训练
+    print("开始训练...")
     trainer.train()
 
-    # 7. 保存模型
     trainer.save_model("./lora_tinyllama")
+    print("模型保存完成，路径：./lora_tinyllama")
 
 if __name__ == "__main__":
     train()
