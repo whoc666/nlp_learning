@@ -9,7 +9,7 @@
 
 - 🤗 **数据集**：`whoc666/nlp_learing_dataset`
   - 包含维基百科与 Arxiv 的英文摘要数据，格式为 JSONL，字段为 `{"text": ...}`。
-  - 链接：[Hugging Face Dataset](https://huggingface.co/whoc666/nlp_learing_dataset)
+  - 链接：[Hugging Face Dataset](https://huggingface.co/datasets/whoc666/nlp_learning_dataset)
 
 - 🤗 **模型仓库**：`whoc666/nlp_learning_model`
   - 使用 `facebook/opt-125m` 模型微调得到，支持基础的语言建模能力。
