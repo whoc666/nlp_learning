@@ -52,7 +52,7 @@ cd nlp_learning_model
 
 
 
-![demo](![image](https://github.com/user-attachments/assets/11c262a3-bb5b-490a-b4fe-4e59c81ec1f8))
+https://github.com/user-attachments/assets/11c262a3-bb5b-490a-b4fe-4e59c81ec1f8
 
 ---
 
