@@ -15,18 +15,6 @@
   - 使用 `facebook/opt-125m` 模型微调得到，支持基础的语言建模能力。
   - 链接：[Hugging Face Model](https://huggingface.co/whoc666/nlp_learning_model)
 
-- 🚀 **Space 在线体验**：`whoc666/nlp_learning_space`
-  - 使用 Gradio 构建的 Web 界面，加载模型进行文本生成。
-  - 链接：[Hugging Face Space](https://huggingface.co/spaces/whoc666/nlp_learning_space)
-
----
-
-## 🚀 快速体验
-
-点击下面链接即可在线使用你的微调模型：
-
-👉 [立即体验 Space](https://huggingface.co/spaces/whoc666/nlp_learning_space)
-
 ---
 
 ## 🧠 模型信息
@@ -45,14 +33,6 @@
 git clone https://huggingface.co/spaces/whoc666/nlp_learning_model
 cd nlp_learning_model
 ```
-
----
-
-## 🖼️ 页面截图（展示）
-
-
-
-https://github.com/user-attachments/assets/11c262a3-bb5b-490a-b4fe-4e59c81ec1f8
 
 ---
 
