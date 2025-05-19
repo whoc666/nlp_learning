@@ -1,47 +1,73 @@
-# NLP LLaMA3 Project
 
-本项目旨在构建一个基于大语言模型（LLM）的 NLP 学习助手。
+# NLP 学习助手（NLP Learning Assistant）
 
-## 📁 项目结构
-
-```
-nlp_llama3_project/
-├── data/                  # 数据集原始数据与清洗代码
-│   ├── raw/               # 原始数据文件
-│   ├── processed/         # 清洗后的数据
-│   └── prepare_data.py    # 数据清洗脚本
-├── training/              # 模型训练相关代码
-│   ├── train_qlora.py     # 微调主程序
-│   └── training_utils.py  # LoRA配置与训练辅助
-├── inference/             # 推理测试代码
-│   ├── infer.py           # CLI 推理
-│   └── tokenizer_loader.py# 分词器加载模块
-├── gradio_app/            # Gradio 可视化界面与部署
-│   ├── app.py             # Gradio 主程序
-│   └── requirements.txt   # HF Spaces 所需依赖
-├── scripts/               # 工具脚本
-│   └── hf_upload_model.py # 上传模型到 Hugging Face
-├── README.md              # 项目说明文件
-├── LICENSE                # 开源协议（MIT）
-└── .gitignore             # 忽略项配置
-```
-
-## 🚀 功能
-
-- 数据清洗与预处理
-- 轻量化 LLM 微调（QLoRA）
-- CLI 推理接口
-- Gradio 前端部署
-- Hugging Face Hub 自动上传
-
-## ✅ 使用指南
-
-1. 准备数据并运行 `data/prepare_data.py`
-2. 使用 `training/train_qlora.py` 微调模型
-3. 运行 `inference/infer.py` 进行命令行测试
-4. 启动 `gradio_app/app.py` 查看界面交互
-5. 上传模型 `scripts/hf_upload_model.py`
+这是一个基于 Hugging Face 平台构建的 NLP 学习助手项目，涵盖了数据预处理、模型微调、在线部署（Spaces）等完整流程。适合 NLP 初学者理解和体验大模型训练及部署的流程。
 
 ---
 
-本项目支持免费 GPU 环境（如 Colab），适合教育学习用途。
+## 📦 项目结构
+
+- 🤗 **数据集**：`whoc666/nlp_learing_dataset`
+  - 包含维基百科与 Arxiv 的英文摘要数据，格式为 JSONL，字段为 `{"text": ...}`。
+  - 链接：[Hugging Face Dataset](https://huggingface.co/datasets/whoc666/nlp_learing_dataset)
+
+- 🤗 **模型仓库**：`whoc666/nlp_learning_model`
+  - 使用 `facebook/opt-125m` 模型微调得到，支持基础的语言建模能力。
+  - 链接：[Hugging Face Model](https://huggingface.co/whoc666/nlp_learning_model)
+
+- 🚀 **Space 在线体验**：`whoc666/nlp_learning_space`
+  - 使用 Gradio 构建的 Web 界面，加载模型进行文本生成。
+  - 链接：[Hugging Face Space](https://huggingface.co/spaces/whoc666/nlp_learning_space)
+
+---
+
+## 🚀 快速体验
+
+点击下面链接即可在线使用你的微调模型：
+
+👉 [立即体验 Space](https://huggingface.co/spaces/whoc666/nlp_learning_space)
+
+---
+
+## 🧠 模型信息
+
+- 基础模型：`facebook/opt-125m`
+- 使用 `Trainer` API 微调，支持 Causal LM 任务
+- 数据集经过 `AutoTokenizer` 分词，标签为输入的 input_ids 复制
+
+---
+
+## 🛠️ 使用方法
+
+你可以下载本项目并在本地运行或修改：
+
+```bash
+git clone https://huggingface.co/spaces/whoc666/nlp_learning_model
+cd nlp_learning_model
+```
+
+---
+
+## 🖼️ 页面截图（展示）
+
+
+
+![demo](./screenshot.png)
+
+---
+
+## 📜 License
+
+本项目默认使用 `apache-2.0` 开源协议，你可以根据自己的需要进行修改。
+
+---
+
+## 🙌 致谢
+
+感谢以下开源工具和社区的支持：
+
+- Hugging Face Transformers
+- Hugging Face Datasets
+- Gradio
+- Google Colab
+
